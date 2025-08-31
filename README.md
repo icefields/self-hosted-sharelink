@@ -75,6 +75,23 @@ python3 -m http.server 6011
 
 Make sure this port is accessible and served over HTTPS, if needed.
 
+## Auto Cleanup
+
+You might want to periodically cleanup the upload directory.
+
+```
+sudo nano /etc/tmpfiles.d/upload-cleanup.conf
+```
+add this line (replace the amount of days to keep the files, path, user and group)
+```
+D /home/youruser/shared-uploads 0755 youruser youruser 7d
+```
+To apply it immediately:
+```
+sudo systemd-tmpfiles --clean
+```
+systemd will take care of running this, without further configuration.
+
 ## 🛡️ Security Notes
 
 * Authentication uses a static token passed via the `X-Auth-Token` header.
