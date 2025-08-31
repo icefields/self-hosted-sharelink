@@ -1,4 +1,4 @@
-# Simple Flask Upload Server
+# Simple Share - Upload Tool
 
 This is a small Python/Flask-based file upload server. It stores uploaded files in a local folder and returns a public URL. A simple token-based authentication mechanism is included.
 
