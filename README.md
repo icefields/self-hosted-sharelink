@@ -80,7 +80,7 @@ Make sure this port is accessible and served over HTTPS, if needed.
 You might want to periodically cleanup the upload directory.
 
 ```
-sudo nano /etc/tmpfiles.d/upload-cleanup.conf
+sudo vim /etc/tmpfiles.d/upload-cleanup.conf
 ```
 add this line (replace the amount of days to keep the files, path, user and group)
 ```
