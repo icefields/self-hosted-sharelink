@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import os
 import uuid
+import hashlib
 from flask import send_from_directory
 
 # Load environment variables from .env
@@ -33,9 +34,10 @@ def upload_file():
     
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
-    
+
     # Create a unique filename using uuid and save.
-    filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+    # filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+    filename = str(uuid.uuid4())[:8] + os.path.splitext(file.filename)[1]
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename) 
     file.save(file_path)
     
