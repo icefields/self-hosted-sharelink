@@ -37,7 +37,9 @@ def upload_file():
 
     # Create a unique filename using uuid and save.
     # filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-    filename = str(uuid.uuid4())[:8] + os.path.splitext(file.filename)[1]
+    # filename = str(uuid.uuid4())[:8] + os.path.splitext(file.filename)[1]
+    ext = ".tar.gz" if file.filename.endswith(".tar.gz") else os.path.splitext(file.filename)[1]
+    filename = str(uuid.uuid4())[:8] + ext
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename) 
     file.save(file_path)
     
