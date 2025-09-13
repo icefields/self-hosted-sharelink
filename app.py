@@ -20,6 +20,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+compound_exts = [".tar.gz", ".tar.bz2", ".tar.xz", ".tar.zst",".user.js", ".min.js", ".d.ts", ".test.js", ".module.css"]
+
 # Route to handle file upload
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -35,10 +37,19 @@ def upload_file():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # Create a unique filename using uuid and save.
-    # filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-    # filename = str(uuid.uuid4())[:8] + os.path.splitext(file.filename)[1]
-    ext = ".tar.gz" if file.filename.endswith(".tar.gz") else os.path.splitext(file.filename)[1]
+    # CALCULATE EXTENSION
+    # Simple, only handle single extension, this also handles filename.
+    #   filename = str(uuid.uuid4())[:8] + os.path.splitext(file.filename)[1]
+    # Simple extension + handles tar.gz
+    #   ext = ".tar.gz" if file.filename.endswith(".tar.gz") else os.path.splitext(file.filename)[1]
+    # Handle multiple double extensions from a list:  
+    original_filename = file.filename
+    lower_filename = original_filename.lower()
+    ext = next((ce for ce in compound_exts if lower_filename.endswith(ce)), None)
+    if not ext:     # Fallback to single extension or empty string if none
+        ext = os.path.splitext(original_filename)[1]  # Includes the leading dot or ''
+    
+    # BUILD FILE PATH
     filename = str(uuid.uuid4())[:8] + ext
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename) 
     file.save(file_path)
