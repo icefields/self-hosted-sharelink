@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-compound_exts = [".tar.gz", ".tar.bz2", ".tar.xz", ".tar.zst",".user.js", ".min.js", ".d.ts", ".test.js", ".module.css"]
+compound_exts = [".tar.gz", ".tar.bz2", ".tar.xz", ".tar.zst", ".tar.7z", ".tar.Z", ".tar.lz", ".tar.lzma", ".tar.lzo", ".user.js", ".min.js", ".d.ts", ".test.js", ".module.css"]
 
 # Route to handle file upload
 @app.route('/upload', methods=['POST'])
