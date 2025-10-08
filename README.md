@@ -22,6 +22,11 @@ PUBLIC_URL_BASE=https://yourdomain.net:port
 UPLOAD_FOLDER=/home/youruser/shared-uploads
 ```
 
+PUBLIC_URL_BASE is the url exposed to the public and will be returned by the script after upload (`PUBLIC_URL_BASE}/{filename}`).
+
+UPLOAD_TOKEN is an arbitrary string to be used for authentication.
+
+UPLOAD_FOLDER is the location on your server where the files will live. This directory will be served by the file server. 
 Make sure the upload folder exists and is writable by the user running the app:
 
 ```bash
