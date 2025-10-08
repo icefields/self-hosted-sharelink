@@ -109,7 +109,6 @@ systemd will take care of running this, without further configuration.
 
 ## ✅ To-Do
 
-* Add expiration/cleanup for old uploads
 * Add file size/type restrictions
 * Add logging or rate limiting
 * Dockerize the application
